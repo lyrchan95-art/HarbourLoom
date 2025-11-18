@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhaka - The City of Mosques</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c5530;
+            --secondary: #d4af37;
+            --accent: #a52a2a;
+            --light: #f8f5f0;
+            --dark: #2c2c2c;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1594736797933-d0c1388d1010?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background-color: #e6c126;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--dark);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 15px auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Highlights Section */
+        .highlights {
+            background-color: var(--light);
+        }
+
+        .highlight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Culture Section */
+        .culture-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .culture-item {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .culture-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .culture-text {
+            flex: 1;
+        }
+
+        .culture-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .culture-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background-color: var(--light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Facts Section */
+        .facts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .fact-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .fact-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .fact-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .fact-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Visit Section */
+        .visit-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1594736797933-d0c1388d1010?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .visit-section .section-title h2 {
+            color: white;
+        }
+
+        .visit-section .section-title h2:after {
+            background-color: var(--secondary);
+        }
+
+        .visit-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .about-content, .culture-item {
+                flex-direction: column;
+            }
+            
+            .culture-item:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1>Dhaka</h1>
+            <p class="tagline">The City of Mosques & Heart of Bangladesh</p>
+            <div class="header-buttons">
+                <a href="#about" class="btn">Explore Dhaka</a>
+                <a href="#visit" class="btn btn-outline">Plan Your Visit</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="container">
+        <div class="section-title">
+            <h2>About Dhaka</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Dhaka, the capital of Bangladesh, is a vibrant megacity known for its rich history, bustling streets, and warm-hearted people. Founded in the 17th century, it has grown into one of the world's most densely populated cities, serving as the political, economic, and cultural hub of the country.</p>
+                <p>Located on the banks of the Buriganga River, Dhaka is famous for its Mughal and British colonial architecture, vibrant rickshaw art, and as a center for the world's textile industry.</p>
+                <p>With a population exceeding 21 million in the metropolitan area, Dhaka is a city of contrasts where ancient traditions coexist with modern development, creating a unique urban tapestry that captivates visitors from around the world.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1558002036-7a4cf14c8e8d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dhaka Cityscape">
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights">
+        <div class="container">
+            <div class="section-title">
+                <h2>Dhaka Highlights</h2>
+            </div>
+            <div class="highlight-cards">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1592220779928-04ad017b58bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lalbagh Fort">
+                    </div>
+                    <div class="card-content">
+                        <h3>Lalbagh Fort</h3>
+                        <p>An incomplete 17th-century Mughal fort complex that stands as an emblem of the city's historical significance.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1587477704623-53e63162d41d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ahsan Manzil">
+                    </div>
+                    <div class="card-content">
+                        <h3>Ahsan Manzil</h3>
+                        <p>The former official residential palace of the Nawab of Dhaka, known as the Pink Palace for its distinctive color.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1592220779928-04ad017b58bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sadarghat River Port">
+                    </div>
+                    <div class="card-content">
+                        <h3>Sadarghat River Port</h3>
+                        <p>The bustling river port on the Buriganga River, offering a glimpse into Dhaka's vibrant riverine culture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture" class="container">
+        <div class="section-title">
+            <h2>Culture & Heritage</h2>
+        </div>
+        <div class="culture-content">
+            <div class="culture-item">
+                <div class="culture-text">
+                    <h3>Rickshaw Art</h3>
+                    <p>Dhaka is famous for its elaborately decorated cycle rickshaws, which serve as moving galleries of folk art. These vibrant paintings depict everything from Bollywood stars to rural landscapes, making each rickshaw a unique piece of mobile art.</p>
+                </div>
+                <div class="culture-image">
+                    <img src="https://images.unsplash.com/photo-1589107340718-cd067ea83cc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rickshaw Art">
+                </div>
+            </div>
+            <div class="culture-item">
+                <div class="culture-text">
+                    <h3>Culinary Delights</h3>
+                    <p>Dhaka's food scene reflects its diverse cultural influences. From street food like fuchka and chotpoti to traditional Bengali feasts with ilish (hilsa fish) and biryani, the city offers an unforgettable culinary journey for food enthusiasts.</p>
+                </div>
+                <div class="culture-image">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bangladeshi Food">
+                </div>
+            </div>
+            <div class="culture-item">
+                <div class="culture-text">
+                    <h3>Textile Heritage</h3>
+                    <p>As the heart of Bangladesh's garment industry, Dhaka plays a crucial role in global fashion. The city is also known for its traditional muslin fabric, jamdani weaving, and nakshi kantha embroidery, preserving ancient textile traditions.</p>
+                </div>
+                <div class="culture-image">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Textile Heritage">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Dhaka in Pictures</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1592220779928-04ad017b58bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dhaka Street">
+                    <div class="gallery-overlay">
+                        <h3>Bustling Streets</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1587477704623-53e63162d41d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dhaka Mosque">
+                    <div class="gallery-overlay">
+                        <h3>Historic Mosques</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1589107340718-cd067ea83cc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rickshaws">
+                    <div class="gallery-overlay">
+                        <h3>Colorful Rickshaws</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dhaka Food">
+                    <div class="gallery-overlay">
+                        <h3>Local Cuisine</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facts Section -->
+    <section class="container">
+        <div class="section-title">
+            <h2>Dhaka Facts</h2>
+        </div>
+        <div class="facts-container">
+            <div class="fact-box">
+                <div class="fact-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="fact-number">21M+</div>
+                <p>Population in Metropolitan Area</p>
+            </div>
+            <div class="fact-box">
+                <div class="fact-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="fact-number">1608</div>
+                <p>Year of Establishment</p>
+            </div>
+            <div class="fact-box">
+                <div class="fact-icon">
+                    <i class="fas fa-mosque"></i>
+                </div>
+                <div class="fact-number">2000+</div>
+                <p>Mosques in the City</p>
+            </div>
+            <div class="fact-box">
+                <div class="fact-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <div class="fact-number">Bengali</div>
+                <p>Official Language</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Section -->
+    <section id="visit" class="visit-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Plan Your Visit</h2>
+            </div>
+            <div class="visit-content">
+                <p>Dhaka welcomes visitors with its unique blend of history, culture, and urban energy. The best time to visit is between October and March when the weather is cooler and more pleasant for exploration.</p>
+                <p>Must-see attractions include the historic Old Dhaka, the National Parliament Building, and the bustling markets of New Market and Bashundhara City.</p>
+                <a href="#" class="btn">Discover Travel Guides</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Dhaka</h3>
+                    <p>Dhaka is the vibrant capital of Bangladesh, known for its rich history, cultural diversity, and warm hospitality.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Dhaka</a></li>
+                        <li><a href="#culture">Culture</a></li>
+                        <li><a href="#visit">Plan Your Visit</a></li>
+                        <li><a href="#">Attractions</a></li>
+                        <li><a href="#">Events</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
+                        <li><i class="fas fa-phone"></i> +880 1234 567890</li>
+                        <li><i class="fas fa-envelope"></i> info@dhaka.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Dhaka Tourism. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > 50) {
+                header.style.opacity = 0.9;
+            } else {
+                header.style.opacity = 1;
+            }
+        });
+
+        // Add animation to fact boxes when they come into view
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 1s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fact-box').forEach(box => {
+            observer.observe(box);
+        });
+    </script>
+</body>
+</html>
